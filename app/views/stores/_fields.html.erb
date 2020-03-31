@@ -1,0 +1,7 @@
+<%= f.input :name, label_html: { class: 'active' } %>
+<%= f.input :street, label_html: { class: 'active' } %>
+<%= f.input :city, label_html: { class: 'active' } %>
+<%= f.input :phone, label_html: { class: 'active' } %>
+<%= f.input :state, collection: Store::STATES_LIST, include_blank: true %>
+<%= f.input :zip, label_html: { class: 'active' } %>
+<%= f.input :active %>

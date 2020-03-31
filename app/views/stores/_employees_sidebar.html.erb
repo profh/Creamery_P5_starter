@@ -1,0 +1,20 @@
+<div class="card">
+  <div class="card-content">
+    <h5>Current Employees</h5>
+
+    <% if @current_employees.empty? %>
+      <p>There are no employees assigned at this time.</p>
+    <% else %>
+
+      <table class="striped highlight">
+        <% @current_employees.each do |employee| %>
+          <tr %>
+            <td><%= link_to employee.name, employee_path(employee) %></td>
+          </tr>
+        <% end %>
+      </table>
+      <p class="supertiny"></p>
+      <br />
+    <% end %>
+  </div>
+</div>

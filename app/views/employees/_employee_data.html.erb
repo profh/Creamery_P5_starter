@@ -1,0 +1,29 @@
+<div class="card">
+  <div class="card-content">
+    <h4><%= @employee.proper_name %></h4>
+    <h5><%= @employee.role.capitalize %></h5><br />
+
+    <b>Current Assignment:&nbsp;&nbsp;</b><br>
+      <% if @employee.current_assignment.nil? %>
+        n/a<br /><br />
+      <% else %>
+        <%= link_to @employee.current_assignment.store.name, store_path(@employee.current_assignment.store) %><br />
+        since <%= @employee.current_assignment.start_date.strftime("%b %-d, %Y") %><br /><br />
+
+      <% end %>
+
+    <b>Phone:&nbsp;&nbsp;</b><br>
+      <%= number_to_phone @employee.phone %><br /><br />
+
+    <b>Social Security Number:&nbsp;&nbsp;</b><br>
+      <%= number_to_ssn @employee.ssn %><br /><br />
+
+    <b>Date of Birth:&nbsp;&nbsp;</b><br>
+      <%= @employee.date_of_birth.to_datetime.strftime("%b %-d, %Y") %><br /><br />
+
+
+    <b>Active with AMC?&nbsp;&nbsp;</b>
+      <%= @employee.active ? "Yes" : "No" %>
+      <br>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Creamery Management System</title>
+    <%= csrf_meta_tags %>
+    
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%# javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons" %>
+    <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Bitter|Josefin+Sans|Nunito|Alfa+Slab+One" %>
+  </head>
+
+  <body>
+    <header>
+    <!-- Partials for the topbar and navigation -->
+    <%= render :partial => "partials/topbar" %>
+    <%= render :partial => "partials/nav" %>
+    </header>
+    <main>
+    <div class="container">
+      <div class="row">
+        <div class="col s12" id="main_content">
+          <!-- Flash messages appear here -->
+          <%= render :partial => "partials/flash" %>
+
+          <!-- MAIN CONTENT OF TEMPLATE GOES HERE -->
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+    </main>
+    
+    <%= render :partial => "partials/footer" %> 
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>   
+  </body>
+</html>

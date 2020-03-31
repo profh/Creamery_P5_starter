@@ -1,0 +1,41 @@
+<div class="card">
+  <div class="card-content">
+    <h5><%= state.capitalize %> Assignments</h5>
+
+    <% if assignments.empty? %>
+      <p>There are no <%= state.downcase %> assignments at this time.</p>
+    <% else %>
+
+      <table class="striped highlight">
+        <thead>
+          <th>Employee Name</th>
+          <th>Store Name</th>
+          <th>Dates</th>
+          <th>Options</th>
+        </thead>
+        <% assignments.each do |assignment| %>
+          <tr %>
+            <td><%= link_to assignment.employee.name, employee_path(assignment.employee) %></td>
+            <td><%= link_to assignment.store.name, store_path(assignment.store) %></td>
+            <td><%= assignment.start_date.strftime("%-m/%-d/%y") %> - <%= assignment.end_date.nil? ? 'Present' : assignment.end_date.strftime("%-m/%-d/%y") %></td>
+            <td>
+              <% if state.downcase == 'current' %>
+                <%= link_to(terminate_assignment_path(assignment), method: :patch) do %>
+                  <i class="material-icons">stop</i>
+                <% end %>
+              <% end %>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <%= link_to(assignment_path(assignment), method: :delete, data: { confirm: 'Are you sure you wish to delete this assignment?' }) do %>
+                  <i class="material-icons">delete</i>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      <p class="supertiny"></p>
+      <br />
+      <%= will_paginate assignments, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+      <br />
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-content">
+    <h4><%= state.capitalize %> Stores owned by AMC</h4>
+
+    <% if stores.empty? %>
+      <p>There are no <%= state.downcase %> stores at this time.</p>
+    <% else %>
+
+      <table class="striped highlight">
+        <thead>
+          <th>Name</th>
+          <th>Current Assignments</th>
+          <th>Phone</th>
+          <th class="align_center">Options</th>
+        </thead>
+        <% stores.each do |store| %>
+          <tr>
+            <td><%= link_to store.name, store_path(store) %></td>
+            <td><%= store.assignments.current.count %></td>
+            <td><%= number_to_phone store.phone %></td>
+
+            <td class="align_center">
+              <%= link_to edit_store_path(store) do %>
+                <i class="material-icons">edit</i>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      <p class="supertiny"></p>
+      <br />
+      <%= will_paginate stores, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+    <% end %>
+  </div>
+</div>

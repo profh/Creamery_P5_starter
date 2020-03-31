@@ -1,0 +1,33 @@
+
+
+<% unless @previous_assignments.empty? %>
+  <div class="card">
+    <div class="card-content">
+      <h5>Previous Assignments</h5>
+
+      <table class="striped highlight">
+        <thead>
+          <th>Store</th>
+          <th>Dates</th>
+        </thead>
+        <% @previous_assignments.each do |assignment| %>
+          <tr %>
+            <td><%= link_to assignment.store.name, store_path(assignment.store) %></td>
+            <td><%= assignment.start_date.strftime("%-m/%-d/%y") %> - <%= assignment.end_date.strftime("%-m/%-d/%y") %></td>
+          </tr>
+        <% end %>
+      </table>
+      <p class="supertiny"></p>
+      <br />
+    </div>
+    <div class="card-action">
+      <%= link_to "New Assignment", new_assignment_path(employee_id: @employee.id) %>
+    </div>
+  </div>
+<% else %>
+  <div class="card grey lighten-3">
+    <div class="card-action">
+      <%= link_to "New Assignment", new_assignment_path(employee_id: @employee.id) %>
+    </div>
+  </div>
+<% end %>

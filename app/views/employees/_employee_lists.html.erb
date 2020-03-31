@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-content">
+    <h4><%= state.capitalize %> <%= role.capitalize %> at AMC</h4>
+
+    <% if employees.empty? %>
+      <p>There are no <%= state.downcase %> <%= role.downcase %> at this time.</p>
+    <% else %>
+
+      <table class="striped highlight">
+        <thead>
+          <th>Name</th>
+          <th>Current Assignment</th>
+          <th>Phone</th>
+          <th class="align_center">Options</th>
+        </thead>
+        <% for employee in employees %>
+          <tr class="<%= cycle('dg_list_line_odd', 'dg_list_line_even') %>">
+            <td><%= link_to employee.name, employee_path(employee) %></td>
+            <td><%= employee.current_assignment.nil? ? 'n/a' : link_to(employee.current_assignment.store.name, store_path(employee.current_assignment.store))  %></td>
+            <td><%= number_to_phone employee.phone %></td>
+
+          <td class="align_center">
+            <%= link_to edit_employee_path(employee) do %>
+              <i class="material-icons">edit</i>
+            <% end %>
+          </td>
+          </tr>
+        <% end %>
+      </table>
+      <p class="supertiny"></p>
+      <br />
+      <%= will_paginate employees, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-content">
+    <p>
+      <h4>
+        <%= @store.name %> Store
+      </h4>
+    </p>
+
+    <p>
+      <b>Address:</b><br>
+      <%= @store.street %><br />
+      <%= @store.city %>, <%= @store.state %> <%= @store.zip %>
+    </p><br />
+
+    <p>
+      <b>Phone:</b><br>
+      <%= number_to_phone @store.phone %>
+    </p><br />
+
+    <p>
+      <b>Manager(s):</b><br>
+      <%= 'n/a' if @current_managers.empty? %>
+      <% @current_managers.each do |manager| %>
+        <%= link_to manager.proper_name, employee_path(manager) %><br />
+      <% end %>
+    </p><br />
+
+    <p>
+      <b>Active:</b> 
+      <%= @store.active ? "Yes" : "No" %>
+    </p><br />
+  </div>
+</div>
