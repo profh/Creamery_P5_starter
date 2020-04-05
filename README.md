@@ -23,4 +23,13 @@ The development database can be created and populated with a large number of rea
 
 Additional notes
 ---
-More exciting news to come...
+As you think through your information architecture, here are a couple of things to keep in mind:
+
+- for employees, they need to quickly find upcoming shifts they are scheduled to work.
+- employees need to be able to see their most recent pay statement (or payroll).
+- if an employee logs in and has a shift scheduled that day that is pending, some type of large button to "clock in" should appear; if the shift has started, but not over, then a similar "clock out" button should appear.
+- a manager's most important task is to add upcoming shifts to employees assigned to the store.
+- seeing a list of upcoming shifts for the particular store would also be very helpful to managers.
+- managers also need to easily fill out reports on the jobs performed after each employee's shift is finished.
+- administrators need a way to easily calculate the payrolls for a particular store over a particular time period (e.g, past two weeks, past month, etc.)
+- administrators have other needs that you should reflect on further.
