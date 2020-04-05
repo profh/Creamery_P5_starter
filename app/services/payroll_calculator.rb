@@ -9,14 +9,29 @@ class PayrollCalculator
   attr_reader :date_range, :start_date, :end_date
   attr_accessor :payrolls
 
-  def create_payroll_for(store)
-    all_shifts = Shift.for_store(store).for_dates(date_range)
+  def create_payrolls_for(store)
+    reset_payrolls_hash
+    all_shifts = Shift.for_store(store).for_dates(date_range).by_employee
     all_shifts.each do |shift|
       add_to_payrolls(shift)
     end
     # return an array of payroll objects, one for each employee
     # working shifts at the store during that date range
     return payrolls.values
+  end
+
+  def create_payroll_record_for(employee)
+    reset_payrolls_hash
+    all_shifts = Shift.for_employee(employee).for_dates(date_range)
+    if all_shifts.empty?
+      return create_null_payroll(employee)
+    end
+    all_shifts.each do |shift|
+      add_to_payrolls(shift)
+    end
+    # return a payroll object for the employee in question,
+    # for all shifts worked during that date range
+    return payrolls.values.first
   end
 
   private
@@ -42,6 +57,17 @@ class PayrollCalculator
     payroll.hours += shift.duration
     payroll.pay_earned += (shift.duration) * (payroll.pay_rate)
     return payroll
+  end
+
+  def create_null_payroll(employee)
+    payroll = Payroll.new(employee)
+    payroll.pay_grade = employee.current_pay_grade
+    payroll.pay_rate = employee.current_pay_rate
+    return payroll
+  end
+
+  def reset_payrolls_hash
+    @payrolls = Hash.new
   end
 
 end
