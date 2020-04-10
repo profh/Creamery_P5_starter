@@ -82,7 +82,7 @@ class AssignmentTest < ActiveSupport::TestCase
       # Note that we've been testing end_date: nil for a while now so safe to assume works...
       @assign_alex = FactoryBot.build(:assignment, employee: @alex, store: @oakland, start_date: 3.months.ago.to_date, end_date: 1.month.ago.to_date, pay_grade: @c1)
       assert @assign_alex.valid?
-      @second_assignment_for_alex = FactoryBot.build(:assignment, employee: @alex, store: @oakland, start_date: 3.weeks.ago.to_date, end_date: Time.now.to_date, pay_grade: @c1)
+      @second_assignment_for_alex = FactoryBot.build(:assignment, employee: @alex, store: @oakland, start_date: 3.weeks.ago.to_date, end_date: Date.current, pay_grade: @c1)
       assert @second_assignment_for_alex.valid?
     end
     
